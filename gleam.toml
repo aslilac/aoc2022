@@ -1,0 +1,12 @@
+name = "aoc2022"
+version = "1.0.0"
+licences = ["MIT"]
+description = "Advent of Code 2022, in Gleam"
+repository = { type = "github", user = "aslilac", repo = "aoc2022" }
+
+[dependencies]
+gleam_erlang = "~> 0.17"
+gleam_stdlib = "~> 0.25"
+
+[dev-dependencies]
+gleeunit = "~> 0.7"
