@@ -43,10 +43,10 @@ fn translate_outcome(outcome: String) -> Result(Order, Nil) {
 }
 
 fn compare(of me: Attack, over opponent: Attack) {
-  case #(me, opponent) {
-    #(Rock, Scissors) | #(Scissors, Paper) | #(Paper, Rock) -> Gt
-    _ if me == opponent -> Eq
-    _ -> Lt
+  case me, opponent {
+    Rock, Scissors | Scissors, Paper | Paper, Rock -> Gt
+    _, _ if me == opponent -> Eq
+    _, _ -> Lt
   }
 }
 
@@ -59,15 +59,15 @@ fn compare_score(outcome: Order) {
 }
 
 fn attack_from(opponent: Attack, outcome: Order) -> Result(Attack, Nil) {
-  case #(opponent, outcome) {
-    #(_, Eq) -> Ok(opponent)
-    #(Paper, Lt) -> Ok(Rock)
-    #(Scissors, Gt) -> Ok(Rock)
-    #(Scissors, Lt) -> Ok(Paper)
-    #(Rock, Gt) -> Ok(Paper)
-    #(Rock, Lt) -> Ok(Scissors)
-    #(Paper, Gt) -> Ok(Scissors)
-    _ -> Error(Nil)
+  case opponent, outcome {
+    _, Eq -> Ok(opponent)
+    Paper, Lt -> Ok(Rock)
+    Scissors, Gt -> Ok(Rock)
+    Scissors, Lt -> Ok(Paper)
+    Rock, Gt -> Ok(Paper)
+    Rock, Lt -> Ok(Scissors)
+    Paper, Gt -> Ok(Scissors)
+    _, _ -> Error(Nil)
   }
 }
 
