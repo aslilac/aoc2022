@@ -60,17 +60,40 @@ fn compare_score(outcome: Order) {
 
 fn attack_from(opponent: Attack, outcome: Order) -> Result(Attack, Nil) {
   case #(opponent, outcome) {
+    #(_, Eq) -> Ok(opponent)
     #(Paper, Lt) -> Ok(Rock)
-    #(Rock, Eq) -> Ok(Rock)
     #(Scissors, Gt) -> Ok(Rock)
     #(Scissors, Lt) -> Ok(Paper)
-    #(Paper, Eq) -> Ok(Paper)
     #(Rock, Gt) -> Ok(Paper)
     #(Rock, Lt) -> Ok(Scissors)
-    #(Scissors, Eq) -> Ok(Scissors)
     #(Paper, Gt) -> Ok(Scissors)
     _ -> Error(Nil)
   }
+}
+
+fn decode_line(it) {
+  let #(them, me) =
+    string.split_once(it, " ")
+    |> extra.unwrap_forever
+
+  #(
+    translate_attack(them)
+    |> extra.unwrap_forever,
+    translate_outcome(me)
+    |> extra.unwrap_forever,
+  )
+}
+
+fn score_game(pairing) {
+  let #(them, outcome) = pairing
+  let me =
+    attack_from(them, outcome)
+    |> extra.unwrap_forever
+  let attack_score = score(me)
+  let outcome = compare(me, them)
+  let win_score = compare_score(outcome)
+
+  attack_score + win_score
 }
 
 pub fn main() {
@@ -79,31 +102,9 @@ pub fn main() {
 
   input
   |> string.split("\n")
-  // remove empty lines
   |> list.filter(function.compose(string.is_empty, bool.negate))
-  |> list.map(fn(it) {
-    let #(them, me) =
-      string.split_once(it, " ")
-      |> extra.unwrap_forever
-
-    #(
-      translate_attack(them)
-      |> extra.unwrap_forever,
-      translate_outcome(me)
-      |> extra.unwrap_forever,
-    )
-  })
-  |> list.map(fn(pairing) {
-    let #(them, outcome) = pairing
-    let me =
-      attack_from(them, outcome)
-      |> extra.unwrap_forever
-    let attack_score = score(me)
-    let outcome = compare(me, them)
-    let win_score = compare_score(outcome)
-
-    attack_score + win_score
-  })
+  |> list.map(decode_line)
+  |> list.map(score_game)
   |> int.sum()
   |> io.debug
 }
