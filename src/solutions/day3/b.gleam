@@ -19,19 +19,6 @@ fn to_priority(item) {
   }
 }
 
-fn enumerate(items: List(a)) -> List(#(a, Int)) {
-  let result =
-    items
-    |> list.map_fold(0, fn(i, it) { #(i + 1, #(it, i)) })
-
-  result.1
-}
-
-fn deenumerate(items: List(#(a, Int))) -> List(a) {
-  items
-  |> list.map(fn(it) { it.0 })
-}
-
 pub fn main() {
   io.println("aoc 2022 day 3 answer:")
   assert Ok(input) = file.read(input_file)
@@ -44,12 +31,7 @@ pub fn main() {
     |> string.to_graphemes
     |> set.from_list
   })
-  |> enumerate
-  |> list.chunk(fn(it) {
-    let i = it.1
-    i / 3
-  })
-  |> list.map(deenumerate)
+  |> list.sized_chunk(3)
   |> list.map(fn(group) {
     group
     |> list.reduce(set.intersection)
