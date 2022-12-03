@@ -3,6 +3,8 @@ import solutions/day1/a as day1a
 import solutions/day1/b as day1b
 import solutions/day2/a as day2a
 import solutions/day2/b as day2b
+import solutions/day3/a as day3a
+import solutions/day3/b as day3b
 
 pub fn day1_test() {
   day1a.main()
@@ -18,4 +20,12 @@ pub fn day2_test() {
 
   day2b.main()
   |> should.equal(12111)
+}
+
+pub fn day3_test() {
+  day3a.main()
+  |> should.equal(7817)
+
+  day3b.main()
+  |> should.equal(2444)
 }
