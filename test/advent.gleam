@@ -5,6 +5,10 @@ import solutions/day2/a as day2a
 import solutions/day2/b as day2b
 import solutions/day3/a as day3a
 import solutions/day3/b as day3b
+import solutions/day4/a as day4a
+import solutions/day4/b as day4b
+import solutions/day5/a as day5a
+import solutions/day5/b as day5b
 
 pub fn day1_test() {
   day1a.main()
@@ -28,4 +32,20 @@ pub fn day3_test() {
 
   day3b.main()
   |> should.equal(2444)
+}
+
+pub fn day4_test() {
+  day4a.main()
+  |> should.equal(464)
+
+  day4b.main()
+  |> should.equal(770)
+}
+
+pub fn day5_test() {
+  day5a.main()
+  |> should.equal(0)
+
+  day5b.main()
+  |> should.equal(0)
 }
