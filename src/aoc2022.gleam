@@ -6,9 +6,10 @@
 // import solutions/day3/b as day3b
 // import solutions/day4/a as day4a
 // import solutions/day4/b as day4b
-import solutions/day5/a as day5a
-
+// import solutions/day5/a as day5a
 // import solutions/day5/b as day5b
+// import solutions/day10/a as day10a
+import solutions/day10/b as day10b
 
 pub fn main() {
   // day1a.main()
@@ -19,6 +20,8 @@ pub fn main() {
   // day3b.main()
   // day4a.main()
   // day4b.main()
-  day5a.main()
+  // day5a.main()
   // day5b.main()
+  // day10a.main()
+  day10b.main()
 }

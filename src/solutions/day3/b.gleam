@@ -10,12 +10,11 @@ import gleam/string
 const input_file = "./src/solutions/day3/input.txt"
 
 fn to_priority(item) {
-  case bit_string.from_string(item) {
-    <<code>> ->
-      case code >= 97 {
-        True -> code - 96
-        False -> code - 38
-      }
+  let <<code:int>> = bit_string.from_string(item)
+
+  case code >= 97 {
+    True -> code - 96
+    False -> code - 38
   }
 }
 
